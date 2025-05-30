@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <title>পার্সেল ট্র্যাকিং</title>
+  <script src="trackingData.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background: #f3f4f6;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      width: 100%;
+      margin: 10px 0;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>আপনার পার্সেল ট্র্যাক করুন</h2>
+    <input type="text" id="trackInput" placeholder="Tracking ID লিখুন...">
+    <button onclick="trackParcel()">ট্র্যাক করুন</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function trackParcel() {
+      const id = document.getElementById("trackInput").value.trim().toUpperCase();
+      const data = trackingData[id];
+      const resultBox = document.getElementById("result");
+
+      if (data) {
+        resultBox.innerHTML = `
+          <strong>Status:</strong> ${data.status}<br>
+          <strong>Courier:</strong> ${data.courier}<br>
+          <strong>Last Update:</strong> ${data.lastUpdate}
+        `;
+      } else {
+        resultBox.innerHTML = "Tracking ID পাওয়া যায়নি। সঠিক ID দিন।";
+      }
+    }
+  </script>
+</body>
+</html>
